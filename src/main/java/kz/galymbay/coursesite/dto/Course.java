@@ -24,6 +24,9 @@ public class Course {
     @ManyToMany(mappedBy = "courses")
     private Set<User> users;
 
+    @ManyToMany(mappedBy = "courses")
+    private Set<Mentor> mentors;
+
     public Course(String name, String description) {
         this.name = name;
         this.description = description;

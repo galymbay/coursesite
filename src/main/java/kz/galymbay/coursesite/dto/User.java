@@ -3,6 +3,7 @@ package kz.galymbay.coursesite.dto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -39,12 +40,18 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "course_id"))
     private Set<Course> courses;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "role_user",
+            joinColumns = @JoinColumn(name = "role_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private Set<Role> roles;
+
     public User(String username, String email, String name, String surname, String password, int age) {
         this.username = username;
         this.email = email;
         this.name = name;
         this.surname = surname;
-        this.password = password;
+        this.password = new BCryptPasswordEncoder().encode(password);
         this.age = age;
     }
 }

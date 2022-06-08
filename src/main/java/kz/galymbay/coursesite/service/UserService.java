@@ -3,6 +3,8 @@ package kz.galymbay.coursesite.service;
 import kz.galymbay.coursesite.dto.User;
 import kz.galymbay.coursesite.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +19,7 @@ public class UserService {
     }
 
     public User saveUser(User user) {
+
         return userRepository.save(user);
     }
 

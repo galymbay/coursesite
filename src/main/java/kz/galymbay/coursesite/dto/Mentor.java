@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -31,6 +32,12 @@ public class Mentor {
     private boolean isActive;
     @Column(name = "is_block")
     private boolean isBlock;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "course_mentor",
+            joinColumns = @JoinColumn(name = "course_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private Set<Course> courses;
 
     public Mentor(String username, String email, String name, String surname, String password) {
         this.username = username;
