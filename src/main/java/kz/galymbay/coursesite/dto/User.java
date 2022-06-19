@@ -3,7 +3,6 @@ package kz.galymbay.coursesite.dto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -51,7 +50,7 @@ public class User {
         this.email = email;
         this.name = name;
         this.surname = surname;
-        this.password = new BCryptPasswordEncoder().encode(password);
+        this.password = password;
         this.age = age;
     }
 }

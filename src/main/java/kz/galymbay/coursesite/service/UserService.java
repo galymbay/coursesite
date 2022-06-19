@@ -13,13 +13,14 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     public List<User> getAll() {
         return userRepository.findAll();
     }
 
     public User saveUser(User user) {
-
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
@@ -34,7 +35,7 @@ public class UserService {
         updatedUser.setEmail(user.getEmail());
         updatedUser.setName(user.getName());
         updatedUser.setSurname(user.getSurname());
-        updatedUser.setPassword(user.getPassword());
+        updatedUser.setPassword(passwordEncoder.encode(user.getPassword()));
         updatedUser.setAge(user.getAge());
         updatedUser.setActive(user.isActive());
         updatedUser.setBlock(user.isBlock());

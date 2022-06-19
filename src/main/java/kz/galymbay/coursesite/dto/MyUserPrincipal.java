@@ -20,7 +20,7 @@ public class MyUserPrincipal implements UserDetails {
         List<GrantedAuthority> authorities = new ArrayList<>();
 
         this.user.getRoles().forEach(r -> {
-            GrantedAuthority authority = new SimpleGrantedAuthority(r.toString());
+            GrantedAuthority authority = new SimpleGrantedAuthority(r.getRoleName());
             authorities.add(authority);
         });
 
@@ -29,31 +29,31 @@ public class MyUserPrincipal implements UserDetails {
 
     @Override
     public String getPassword() {
-        return user.getPassword();
+        return this.user.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return user.getUsername();
+        return this.user.getUsername();
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return user.isActive();
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return !user.isBlock();
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return user.isActive();
+        return true;
     }
 }
