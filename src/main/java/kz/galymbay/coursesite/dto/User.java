@@ -32,6 +32,8 @@ public class User {
     private boolean isActive = false;
     @Column(name = "is_block")
     private boolean isBlock = true;
+    @Column(name = "activation_code")
+    private String activationCode;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "course_student",

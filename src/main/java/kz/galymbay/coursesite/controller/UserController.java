@@ -19,9 +19,14 @@ public class UserController {
         return ResponseEntity.ok().body(userService.getAll());
     }
 
-    @PostMapping("/save")
+    @PostMapping("/registration")
     public ResponseEntity<User> saveUser(@RequestBody User user) {
         return ResponseEntity.ok().body(userService.saveUser(user));
+    }
+
+    @GetMapping("/activate/code/{token}")
+    public ResponseEntity<String> activateUser(@PathVariable String token) {
+        return ResponseEntity.ok().body(userService.activateUser(token));
     }
 
     @PostMapping("/get/{id}")
